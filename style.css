@@ -1,0 +1,54 @@
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: gray;
+    text-align: center;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex: 1;
+}
+
+nav {
+    background: rgb(134, 169, 181);
+    width: 150px;
+    padding: 10px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+nav button {
+    padding: 8px;
+    cursor: pointer;
+}
+
+section {
+    background-color: #a4b4d1;
+    flex: 1;
+    padding: 20px;
+    border: 1px solid black;
+    overflow-y: auto;
+}
+
+footer {
+    background-color: #a4b4d1;
+    text-align: right;
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 20px;
+}
