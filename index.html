@@ -2,24 +2,25 @@
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP Nro 2 - Grupo 8</title>
 </head>
 <body>
     <header>
-        <h1>TP Nro 2 - Grupo 8</h1>
+        <h1>TP Nro 2 - Grupo 8 </h1> 
+
     </header>
 
-    <main class="bloque-main">
-        <nav >
-            <button onclick="obtenerEpiYGuardarEnStrapi()">Cargar datos de TMDb y guardar</button>
+    <div class="bloque-main">
+        <aside>
+            <button onclick="obtenerEpiYGuardarEnStrapi()"> Cargar datos de TMDb y guardar</button><br><br>
             <button onclick="mostrarDatosDesdeStrapi()">Mostrar datos desde Strapi</button>
-        </nav>
+        </aside>
         
-        <section id="mainContent">
-            
-        </section>
-    </main>
+        <main>
+
+            <div id="mainContent"></div>
+
+        </main>
+    </div>
     
     <footer>
         <p>Tecnología y Gestión Web - Año 2025</p>
@@ -27,3 +28,4 @@
     <script src="script2.js" defer></script>
 </body>
 </html>
+
