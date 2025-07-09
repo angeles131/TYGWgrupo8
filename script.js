@@ -67,7 +67,7 @@ function mostrarDatosDesdeStrapi() {
         throw new Error("Formato de datos no válido");
     }
 
-    console.log("Datos recibidos de Strapi:", data.data); // 👀 VER QUÉ ESTÁS RECIBIENDO
+    console.log("Datos recibidos de Strapi:", data.data); 
 
     mainContent.innerHTML = "<h3>Episodios guardados en Strapi:</h3>";
     
