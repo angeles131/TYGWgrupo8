@@ -13,16 +13,18 @@ body{
 header {
     background-color: gray;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     border: 1px solid black;
     width: 100%;
-    height: 100px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 header h1{
-    font-size: 48px;
+    font-size: 72px;
+    margin: 0;
 }
-
-
 
 .bloque-main{
     display: flex;
@@ -35,6 +37,25 @@ aside {
     border: 1px solid black;
 }
 
+aside button {
+    width: 100%;
+    padding: 25px;
+    margin-bottom: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    background-color: #76bbbf;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+aside button:hover {
+    background-color: #45a08f;
+}
 
 main {
     flex: 1;
@@ -47,5 +68,14 @@ footer{
     background-color: rgb(173, 220, 238);
     text-align: right;
     border: 1px solid black;
-    padding: 10px;
+    padding: 30px;
+    font-size: 22px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+footer p{
+    font-size: 40px;
+    font-weight: bold;
 }

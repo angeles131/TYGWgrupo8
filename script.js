@@ -71,7 +71,10 @@ function mostrarDatosDesdeStrapi() {
 
     mainContent.innerHTML = "<h3>Episodios guardados en Strapi:</h3>";
     
-data.data.forEach(ep => {
+    // Limitar a solo los primeros 10 episodios
+    const episodiosLimitados = data.data.slice(0, 10);
+    
+episodiosLimitados.forEach(ep => {
     // En tu caso los datos ya están "planos", sin 'attributes'
     const episodio = ep; 
 
