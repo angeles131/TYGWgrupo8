@@ -8,7 +8,7 @@ Tareas realizadas para el TP2:
 
 -Creación de cuenta y autenticación en el sitio themoviedb.org  (Meza Lucía)
 
--Creación de cuenta y autenticación en el sitio strapi  (Schneeberger Angeles)
+-Creación de cuenta, autenticación y elementos en el sitio strapi  (Schneeberger Angeles)
 
 -Relevamiento de las APIs necesarias con las cuales resolverán el problema asignado  (Schneeberger Angeles, Meza Lucía)
 
