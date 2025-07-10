@@ -2,7 +2,7 @@
 Objetivo:
 Obtener los detalles de los primeros 10 episodios de la tercera temporada de la serie de TV The big bang theory y guardar: Nombre del episodio, fecha de estreno, sinopsis, duración, cantidad de votos, y promedio de votos
 
-Tareas relaizadas para el TP2:
+Tareas realizadas para el TP2:
 
 -Investigación del sitio https://developer.themoviedb.org  Meza Lucia
 
