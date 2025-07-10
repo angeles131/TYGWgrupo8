@@ -27,7 +27,7 @@ function guardarEpisodioEnStrapi(episodio) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer 099da4cc6cbb36bf7af8de6f1f241f8c81e49fce15709c4cfcae1313090fa2c1ac8703b0179863b4eb2739ea65ae435e90999adb870d49f9f94dcadd88999763119edca01a6b34c25be92a80ed30db1bcacb20df40e4e7f45542bd501f059201ad578c18a11e4f5cd592cb25d6c31a054409caa99f11b6d2391440e9c72611ea" // token 
+            "Authorization": `Bearer 099da4cc6cbb36bf7af8de6f1f241f8c81e49fce15709c4cfcae1313090fa2c1ac8703b0179863b4eb2739ea65ae435e90999adb870d49f9f94dcadd88999763119edca01a6b34c25be92a80ed30db1bcacb20df40e4e7f45542bd501f059201ad578c18a11e4f5cd592cb25d6c31a054409caa99f11b6d2391440e9c72611ea` 
         },
         body: JSON.stringify({
             data: {
@@ -46,9 +46,9 @@ function guardarEpisodioEnStrapi(episodio) {
 }
 
 function mostrarDatosDesdeStrapi() {
-
-    mainContent.innerHTML = "<p>Cargando datos desde Strapi...</p>";
     
+    mainContent.innerHTML = "<p>Cargando datos desde Strapi...</p>";
+
     fetch("https://gestionweb.frlp.utn.edu.ar/api/g8-episodios", {
         headers: {
             "Authorization": `Bearer 099da4cc6cbb36bf7af8de6f1f241f8c81e49fce15709c4cfcae1313090fa2c1ac8703b0179863b4eb2739ea65ae435e90999adb870d49f9f94dcadd88999763119edca01a6b34c25be92a80ed30db1bcacb20df40e4e7f45542bd501f059201ad578c18a11e4f5cd592cb25d6c31a054409caa99f11b6d2391440e9c72611ea`,
@@ -61,36 +61,82 @@ function mostrarDatosDesdeStrapi() {
         }
         return response.json();
     })
-    
-   .then(data => {
-    if (!data || !Array.isArray(data.data)) {
-        throw new Error("Formato de datos no válido");
-    }
+    .then(data => {
+        if (!data || !Array.isArray(data.data)) {
+            throw new Error("Formato de datos no válido");
+        }
 
-    console.log("Datos recibidos de Strapi:", data.data); 
+        console.log("Datos recibidos de Strapi:", data.data);
 
-    mainContent.innerHTML = "<h3>Episodios guardados en Strapi:</h3>";
-    
-    // Limitar a solo los primeros 10 episodios
-    const episodiosLimitados = data.data.slice(0, 10);
-    
-episodiosLimitados.forEach(ep => {
-    // En tu caso los datos ya están "planos", sin 'attributes'
-    const episodio = ep; 
+        mainContent.innerHTML = "<h3>Primeros 10 episodios guardados en Strapi:</h3>";
+        const datosParaGrafico = [];
 
-    // Ahora accedes directo a las propiedades:
-    const epDiv = document.createElement("div");
-    epDiv.innerHTML = `
-        <strong>${episodio.nombre}</strong><br>
-        Fecha: ${episodio.fecha_estreno || 'Sin fecha'}<br>
-        Duración: ${episodio.duracion || 'N/D'} min<br>
-        Votos: ${episodio.cant_votos || 0} (Prom: ${episodio.promedio_votos || 0})<br>
-        <p>${episodio.sinopsis || ''}</p>
-        <hr>
-    `;
-    mainContent.appendChild(epDiv);
-});
+        const episodiosLimitados = data.data.slice(0, 10);
 
-})
-;
+        episodiosLimitados.forEach(ep => {
+            const episodio = ep;
+
+            datosParaGrafico.push([episodio.nombre, episodio.promedio_votos]);
+        });
+
+        dibujarGraficoBarras(datosParaGrafico);
+
+        const tablaDiv = document.getElementById("tabla");
+        let htmlTabla = `
+            <h3>Tabla de episodios:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Fecha de estreno</th>
+                        <th>Duración (min)</th>
+                        <th>Cant. Votos</th>
+                        <th>Prom. Votos</th>
+                        <th>Sinopsis</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        data.data.slice(0, 10).forEach(ep => {
+            htmlTabla += `
+                <tr>
+                    <td>${ep.nombre}</td>
+                    <td>${ep.fecha_estreno || 'Sin fecha'}</td>
+                    <td>${ep.duracion || 'N/D'}</td>
+                    <td>${ep.cant_votos || 0}</td>
+                    <td>${ep.promedio_votos || 0}</td>
+                    <td>${ep.sinopsis || ''}</td>
+                </tr>
+            `;
+        });
+
+        htmlTabla += `
+                </tbody>
+            </table>
+        `;
+
+        tablaDiv.innerHTML = htmlTabla;
+
+    })
+    .catch(error => {
+        console.error("Error al mostrar datos desde Strapi:", error);
+        mainContent.innerHTML = "<p>Error al cargar datos desde Strapi.</p>";
+    });
 }
+
+function dibujarGraficoBarras(datos) {
+    anychart.onDocumentReady(function () {
+        var chart = anychart.bar();
+
+        chart.data(datos);
+
+        chart.title("Promedio de votos por episodio");
+        chart.xAxis().title("Episodios");
+        chart.yAxis().title("Promedio de votos");
+
+        chart.container("grafico");
+        chart.draw();
+    });
+}
+
