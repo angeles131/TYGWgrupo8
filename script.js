@@ -68,7 +68,7 @@ function mostrarDatosDesdeStrapi() {
 
         console.log("Datos recibidos de Strapi:", data.data);
 
-        mainContent.innerHTML = "<h3>Primeros 10 episodios guardados en Strapi:</h3>";
+        mainContent.innerHTML = "<h3>Promedio de votos de los primeros 10 episodios:</h3>";
         const datosParaGrafico = [];
 
         const episodiosLimitados = data.data.slice(0, 10);
