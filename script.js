@@ -66,23 +66,24 @@ function mostrarDatosDesdeStrapi() {
             throw new Error("Formato de datos no válido");
         }
 
-        console.log("Datos recibidos de Strapi:", data.data);
+    console.log("Datos recibidos de Strapi:", data.data);
 
-        mainContent.innerHTML = "<h3>Promedio de votos de los primeros 10 episodios:</h3>";
-        const datosParaGrafico = [];
+    mainContent.innerHTML = "<h3>Promedio de votos de los primeros 10 episodios de la tercera temporada de la serie de TV The big bang theory: </h3>";
+    const datosParaGrafico = [];
 
-        const episodiosLimitados = data.data.slice(0, 10);
+    const episodiosLimitados = data.data.slice(0, 10);
 
-        episodiosLimitados.forEach(ep => {
-            const episodio = ep;
+    episodiosLimitados.forEach(ep => {
+        const episodio = ep;
 
-            datosParaGrafico.push([episodio.nombre, episodio.promedio_votos]);
+        datosParaGrafico.push([episodio.nombre, episodio.promedio_votos]);
         });
 
-        dibujarGraficoBarras(datosParaGrafico);
+    dibujarGraficoBarras(datosParaGrafico);
 
-        const tablaDiv = document.getElementById("tabla");
-        let htmlTabla = `
+    const tablaDiv = document.getElementById("tabla");
+        
+    let htmlTabla = `
             <h3>Tabla de episodios:</h3>
             <table>
                 <thead>
@@ -139,4 +140,3 @@ function dibujarGraficoBarras(datos) {
         chart.draw();
     });
 }
-
